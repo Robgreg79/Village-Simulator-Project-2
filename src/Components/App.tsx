@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Map } from "./Map";
 import { ResourceView } from "./ResourcesView";
-import "./App.css";
+import "../StyleSheets/App.css";
 
 export function App() {
-  return <></>;
+  return (
+    <div>
+      <Map />
+      <ResourceView />
+    </div>
+  );
 }
