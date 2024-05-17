@@ -6,12 +6,14 @@ export function EditImprovementDialog() {
 
 
   return (
-    <div id='editImprovement'>
-      <label>Type</label>
-      <label>Level</label>
-      <label>Benefit</label>
-      <label>Cost</label>
-      <div>
+    <div id='editImprovementBox'>
+      <div id='editImprovementLabels'>
+        <label>Type</label>
+        <label>Level</label>
+        <label>Benefit</label>
+        <label>Cost</label>
+      </div>
+      <div id='editImprovementButtons'>
         <button>Close</button>
         <button>Upgrade</button>
         <button>Downgrade</button>
