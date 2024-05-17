@@ -1,5 +1,6 @@
 import { useState } from "react";
 import '../Style-Sheets/EditImprovementDialog.css'
+import { Improvement } from "../Models/Improvement";
 
 export function EditImprovementDialog() {
   console.log('');

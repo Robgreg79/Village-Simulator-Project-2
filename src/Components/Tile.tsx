@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EditImprovementDialog } from "./EditImprovementDialog";
 import { AddImprovementDialog } from "./AddImprovementDialog";
-import "../Style Sheets/Tile.css";
+import "../StyleSheets/Tile.css";
 
 export function Tile() {
   return (
