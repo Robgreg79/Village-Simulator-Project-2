@@ -1,23 +1,19 @@
 import { useState } from "react";
-
-interface Resource {
-  icon: HTMLImageElement,
-  type: string,
-  amount: number
-};
+import { Resource } from "../Models/Resource";
 
 interface ResourceLineProps {
   resource: Resource
 };
 
-export function ResourceLine () {
+export function ResourceLine ({resource}: ResourceLineProps) {
 
-    const [resource, setResource] = useState(['People', 'Grain', 'Sheep', 'Lumber', 'Water'])
 
   return (
-    <div className="resource-line">
-      {/* <span>{resource.type} {resource.amount}</span> */}
-    </div>
+  
+    <tr className="resource-line">
+      <td className="resource-left">{/* <img src={}>{resource.icon}</img> */}{resource.type} </td>
+      <td className="resource-right">{resource.amount}</td>
+    </tr>
   )
 
 }
