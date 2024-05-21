@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Map } from "./Map";
 import { ResourceView } from "./ResourcesView";
 import { Resource } from "../Models/Resource";
+import { Improvement } from "../Models/Improvement";
 import "../StyleSheets/App.css";
 import { ResourceLine } from "./ResourceLine";
 
