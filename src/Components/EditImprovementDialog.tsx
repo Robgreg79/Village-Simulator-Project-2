@@ -1,5 +1,5 @@
 import { useState } from "react";
-import '../Style-Sheets/EditImprovementDialog.css'
+import '../StyleSheets/EditImprovementDialog.css'
 import { Improvement } from "../Models/Improvement";
 
 export function EditImprovementDialog() {
@@ -7,7 +7,7 @@ export function EditImprovementDialog() {
 
 
   return (
-    <div id='editImprovementBox'>
+    <div className= "editFrom" id='editImprovementBox'>
       <div id='editImprovementLabels'>
         <label>Type</label>
         <label>Level</label>

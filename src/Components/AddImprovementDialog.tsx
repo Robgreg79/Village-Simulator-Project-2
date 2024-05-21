@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function AddImprovementDialog() {
   return (
-  <form>
+  <form className="addForm">
     <label htmlFor="type">Type</label>
     <select name="type" id="type">
       <option value="house">House</option>
