@@ -12,7 +12,6 @@ export function Map() {
 
   function handleEdit(index) {
   }
-  //(index, improvement.type)
 
   return (
     <>

@@ -20,7 +20,6 @@ export function EditImprovementDialog() {
         <button>Downgrade</button>
         <button>Remove</button>
       </div>
-
     </div>
   )
   
