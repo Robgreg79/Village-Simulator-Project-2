@@ -8,7 +8,9 @@ type ResourceCost = {
   };
   
 interface ImprovementOption {
+  icon: string;
   improvement: string;
+  level: number;
   resourcesProduced: {
     quantity: number;
     type: ResourceType;

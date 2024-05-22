@@ -4,6 +4,12 @@ import "../StyleSheets/Map.css";
 import { AddImprovementDialog } from "./AddImprovementDialog";
 import { EditImprovementDialog } from "./EditImprovementDialog";
 import { Improvement } from "../Models/Improvement";
+import HouseIcon from '../Assets/HouseIcon.png';
+import FieldIcon from '../Assets/FieldIcon.png';
+import PastureIcon from '../Assets/PastureIcon.png';
+import LumberMillIcon from '../Assets/LumberMillIcon.png';
+import WellIcon from '../Assets/WellIcon.png';
+
 interface MapProps {
 improvements: Improvement []
 }
@@ -14,7 +20,9 @@ export function Map({improvements}: MapProps) {
 
   const typeOptions: ImprovementOption[] = [
     {
+      icon: HouseIcon,
       improvement: "House",
+      level: 0,
       resourcesProduced: {
         quantity: 5,
         type: "Person",
@@ -39,7 +47,9 @@ export function Map({improvements}: MapProps) {
       ],
     },
     {
+      icon: FieldIcon,
       improvement: "Field",
+      level: 0,
       resourcesProduced: {
         quantity: 10,
         type: "Grain",
@@ -56,7 +66,9 @@ export function Map({improvements}: MapProps) {
       ],
     },
     {
+      icon: PastureIcon,
       improvement: "Pasture",
+      level: 0,
       resourcesProduced: {
         quantity: 5,
         type: "Sheep",
@@ -77,7 +89,9 @@ export function Map({improvements}: MapProps) {
       ],
     },
     {
+      icon: LumberMillIcon,
       improvement: "Lumber Mill",
+      level: 0,
       resourcesProduced: {
         quantity: 10,
         type: "Lumber",
@@ -90,7 +104,9 @@ export function Map({improvements}: MapProps) {
       ],
     },
     {
+      icon: WellIcon,
       improvement: "Well",
+      level: 0,
       resourcesProduced: {
         quantity: 10,
         type: "Water",
@@ -107,6 +123,7 @@ export function Map({improvements}: MapProps) {
       ],
     },
   ];
+
   const handleClick = (e: MouseEvent, index: number) => {
     console.log(e);
     if ((e.currentTarget as HTMLElement).className === "noImprovement") {

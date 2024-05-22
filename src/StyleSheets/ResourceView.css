@@ -1,0 +1,10 @@
+.resourceTable {
+    padding: 5px;
+    margin: 2px;
+    border: 4px solid black;
+}
+
+.tableHeader {
+    padding: 5px;
+    font-size: large;
+}
