@@ -31,7 +31,7 @@ export function AddImprovementDialog({
     <label htmlFor="benefit">Benefit</label><br /> 
     <p>{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</p>
     <label htmlFor="cost">Cost</label><br />
-    {formData.cost.map((costItem, index) => (
+    {formData.cost.map((costItem: any, index: number) => (
         <p key={index}>{costItem.quantity} {costItem.type}</p>
       ))}
       <button id="cancel" type="submit" onClick={OnCancel}>
