@@ -34,10 +34,10 @@ export function App() {
       amount: 1,
     },
   ]);
-
+ const [improvements,setImprovements] = useState<Improvement[]>([])
   return (
     <div>
-      <Map />
+      <Map improvements ={improvements} />
       <ResourceView resources={resources} />
     </div>
   );

@@ -4,11 +4,11 @@ import "../StyleSheets/Map.css";
 import { AddImprovementDialog } from "./AddImprovementDialog";
 import { EditImprovementDialog } from "./EditImprovementDialog";
 import { Improvement } from "../Models/Improvement";
-// interface MapProps {
-
-// }
+interface MapProps {
+improvements: Improvement []
+}
 type Visibility = "visible" | "hidden";
-export function Map() {
+export function Map({improvements}: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
 
@@ -17,7 +17,7 @@ export function Map() {
       improvement: "House",
       resourcesProduced: {
         quantity: 5,
-        type: "People",
+        type: "Person",
       },
       cost: [
         {
