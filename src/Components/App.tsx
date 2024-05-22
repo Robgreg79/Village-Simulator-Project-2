@@ -7,40 +7,38 @@ import "../StyleSheets/App.css";
 import { ResourceLine } from "./ResourceLine";
 
 export function App() {
-
-  const [resources, setResources] = useState<Resource[]>
-  ([
+  const [resources, setResources] = useState<Resource[]>([
     {
       icon: "",
       type: "People",
-      amount: 1
+      amount: 1,
     },
     {
       icon: "",
       type: "Lumber",
-      amount: 5
+      amount: 5,
     },
     {
       icon: "",
       type: "Grain",
-      amount: 5
+      amount: 5,
     },
     {
       icon: "",
       type: "Water",
-      amount: 5
+      amount: 5,
     },
     {
       icon: "",
       type: "Sheep",
-      amount: 1
-    }
-  ]) 
+      amount: 1,
+    },
+  ]);
 
   return (
     <div>
       <Map />
-      <ResourceView resources={resources}/>
+      <ResourceView resources={resources} />
     </div>
   );
 }
