@@ -11,39 +11,29 @@ export function AddImprovementDialog({
   OnCancel,
   typeOptions,
 }: AddImprovementDialogProps) {
-  const [formData, setFormData] = useState<ImprovementOption>({
-    improvement: "House",
-    resourcesProduced: { quantity: 5, type: "Person" },
-    cost: [{
-      quantity: 0,
-      type: "Person"
-    }],
-  });
+
+  const [formData, setFormData] = useState<any>(typeOptions[0]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
   }
   
-  //can map over options from array - value can be type
-  //typeOptions.map
   return (
     <form onSubmit={handleSubmit} className="addForm">
-      <label htmlFor="type">Type</label>
-      <select name="type" id="type">
-        <option value="house">House</option>
-        <option value="field">Field</option>
-        <option value="pasture">Pasture</option>
-        <option value="lumberMill">Lumber Mill</option>
-        <option value="well">Well</option>
-      </select>
-      <label htmlFor="benefit">Benefit</label>
-      <p>
-        {formData.resourcesProduced.quantity}
-        {formData.resourcesProduced.type}
-      </p>
-      <label htmlFor="cost">Cost</label>
-      <p>{}</p>
-      {/* <button onClick={onClose}>Cancel</button> */}
+    <label htmlFor="type">Type</label><br />
+    <select name="type" id="type" onChange={(value) => setFormData(typeOptions.find(option => value.target.value === option.improvement))}>
+      <option value="House">House</option>
+      <option value="Field">Field</option>
+      <option value="Pasture">Pasture</option>
+      <option value="Lumber Mill">Lumber Mill</option>
+      <option value="Well">Well</option>
+    </select><br />
+    <label htmlFor="benefit">Benefit</label><br /> 
+    <p>{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</p>
+    <label htmlFor="cost">Cost</label><br />
+    {formData.cost.map((costItem, index) => (
+        <p key={index}>{costItem.quantity} {costItem.type}</p>
+      ))}
       <button id="cancel" type="submit" onClick={OnCancel}>
         Cancel
       </button>
