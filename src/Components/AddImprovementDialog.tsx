@@ -16,6 +16,7 @@ export function AddImprovementDialog({
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    
   }
   
   return (
