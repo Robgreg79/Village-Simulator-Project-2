@@ -11,10 +11,13 @@ export function AddImprovementDialog({
   OnCancel,
   typeOptions,
 }: AddImprovementDialogProps) {
-  const [formData, setFormData] = useState({
-    improvement: "",
-    resourcesProduced: { quantity: 25, type: "lemon" },
-    cost: "",
+  const [formData, setFormData] = useState<ImprovementOption>({
+    improvement: "House",
+    resourcesProduced: { quantity: 5, type: "Person" },
+    cost: [{
+      quantity: 0,
+      type: "Person"
+    }],
   });
 
   function handleSubmit(e: FormEvent) {
