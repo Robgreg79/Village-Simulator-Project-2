@@ -7,6 +7,11 @@ import "../StyleSheets/App.css";
 import { ResourceLine } from "./ResourceLine";
 
 export function App() {
+  const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
+  function handleAdd( chosenImprovement : any) {
+    setImprovements((prevImprovement) => [...prevImprovement, chosenImprovement]);
+    console.log(improvements)
+  }
   const [resources, setResources] = useState<Resource[]>([
     {
       icon: "",
@@ -34,10 +39,10 @@ export function App() {
       amount: 1,
     },
   ]);
- const [improvements,setImprovements] = useState<Improvement[]>([])
+
   return (
     <div>
-      <Map improvements ={improvements} />
+      <Map OnAdd = {handleAdd} />
       <ResourceView resources={resources} />
     </div>
   );

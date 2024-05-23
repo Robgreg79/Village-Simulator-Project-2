@@ -5,13 +5,14 @@ import { AddImprovementDialog } from "./AddImprovementDialog";
 import { EditImprovementDialog } from "./EditImprovementDialog";
 import { Improvement } from "../Models/Improvement";
 interface MapProps {
-improvements: Improvement []
+  // improvements: Improvement []
+OnAdd: (chosenImprovement: any) => void 
 }
 type Visibility = "visible" | "hidden";
-export function Map({improvements}: MapProps) {
+export function Map({OnAdd}: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
-
+  
   const typeOptions: ImprovementOption[] = [
     {
       improvement: "House",
@@ -107,8 +108,8 @@ export function Map({improvements}: MapProps) {
       ],
     },
   ];
-  const handleClick = (e: MouseEvent, index: number) => {
-    console.log(e);
+  const handleClick = (e: MouseEvent, i: number) => {
+    console.log(e)
     if ((e.currentTarget as HTMLElement).className === "noImprovement") {
       setIsAddVisible("visible");
     } else {
@@ -116,9 +117,7 @@ export function Map({improvements}: MapProps) {
     }
   };
 
-  function handleAdd() {
-   
-  }
+
 
   function handleUpgrade() {}
 
@@ -128,19 +127,20 @@ export function Map({improvements}: MapProps) {
   return (
     <>
       <div id="map">
-        {[...Array(25)].map((_, index) => (
+        {[...Array(25)].map((tile, i) => (
           <Tile
-            key={`tile-${index}`}
+            key={i}
             // improvement={improvement}
-            OnClick={(e: MouseEvent) => handleClick(e, index)}
+            OnClick={(e: MouseEvent) => handleClick(e, i)}
           />
         ))}
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
-          OnAdd={() => handleAdd}
+          OnAdd={formData => OnAdd(formData)}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
+          
         />
       </div>
       <div style={{ visibility: `${isEditVisible}` }}>

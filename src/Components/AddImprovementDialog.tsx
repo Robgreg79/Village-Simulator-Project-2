@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Resource } from "../Models/Resource";
 interface AddImprovementDialogProps {
-  OnAdd: () => void;
+  OnAdd: (chosen: any) => void;
   OnCancel: () => void;
   typeOptions: ImprovementOption []
   };
@@ -12,10 +12,12 @@ export function AddImprovementDialog({
   typeOptions,
 }: AddImprovementDialogProps) {
 
-  const [formData, setFormData] = useState<any>(typeOptions[0]);
+  const [formData, setFormData] = useState<ImprovementOption>(typeOptions[0]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    OnAdd({formData})
+    console.log(formData)
   }
   
   return (
@@ -31,13 +33,13 @@ export function AddImprovementDialog({
     <label htmlFor="benefit">Benefit</label><br /> 
     <p>{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</p>
     <label htmlFor="cost">Cost</label><br />
-    {formData.cost.map((costItem, index) => (
+    {formData.cost.map((costItem: ResourceCost, index :number) => (
         <p key={index}>{costItem.quantity} {costItem.type}</p>
       ))}
       <button id="cancel" type="submit" onClick={OnCancel}>
         Cancel
       </button>
-      <button id="add" type="submit" onClick={OnAdd}>
+      <button id="add" type="submit" onClick= {OnAdd}>
         Add
       </button>
     </form>
