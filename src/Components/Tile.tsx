@@ -4,14 +4,14 @@ import { AddImprovementDialog } from "./AddImprovementDialog";
 import "../StyleSheets/Tile.css";
 import { Improvement } from "../Models/Improvement";
 interface TileProps {
-  // improvement: Improvement;
-  OnClick: (e) => void;
+  improvements: ImprovementOption[];
+  OnClick: (e: any) => void;
 }
 
-export function Tile({ OnClick }: TileProps) {
+export function Tile({ improvements,OnClick }: TileProps) {
   return (
     <>
-      <div className="noImprovement" onClick={OnClick}></div>
+      <div className= {improvements.improvement} onClick={OnClick}></div>
     </>
   );
 }

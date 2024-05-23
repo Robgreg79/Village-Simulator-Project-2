@@ -4,21 +4,23 @@ import "../StyleSheets/Map.css";
 import { AddImprovementDialog } from "./AddImprovementDialog";
 import { EditImprovementDialog } from "./EditImprovementDialog";
 import { Improvement } from "../Models/Improvement";
-import HouseIcon from '../Assets/HouseIcon.png';
-import FieldIcon from '../Assets/FieldIcon.png';
-import PastureIcon from '../Assets/PastureIcon.png';
-import LumberMillIcon from '../Assets/LumberMillIcon.png';
-import WellIcon from '../Assets/WellIcon.png';
+import HouseIcon from "../assets/HouseIcon.png";
+import FieldIcon from "../assets/FieldIcon.png";
+import PastureIcon from "../assets/PastureIcon.png";
+import LumberMillIcon from "../assets/LumberMillIcon.png";
+import WellIcon from "../assets/WellIcon.png";
 
 interface MapProps {
-  // improvements: Improvement []
-OnAdd: (chosenImprovement: any) => void 
+  improvements: ImprovementOption[];
+  OnAdd: (i:number, chosenImprovement: any) => void;
+  OnUpgrade: (i:number) => void;
+  OnDowngrade: (i:number)=> void
 }
 type Visibility = "visible" | "hidden";
-export function Map({OnAdd}: MapProps) {
+export function Map({ OnAdd, OnUpgrade,OnDowngrade }: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
-  
+  const [clickedI, setClickedI] = useState<number | null>(null);
   const typeOptions: ImprovementOption[] = [
     {
       icon: HouseIcon,
@@ -126,44 +128,42 @@ export function Map({OnAdd}: MapProps) {
   ];
 
   const handleClick = (e: MouseEvent, i: number) => {
-    console.log(e)
-    if ((e.currentTarget as HTMLElement).className === "noImprovement") {
+    console.log(e);
+    if ((e.target as HTMLElement).className === "noImprovement") {
       setIsAddVisible("visible");
+      setClickedI(i)
     } else {
       setIsEditVisible("visible");
+      setClickedI(i)
     }
   };
 
-
-
-  function handleUpgrade() {}
-
-  function handleDowngrade() {}
   function handleRemove() {}
 
   return (
     <>
       <div id="map">
-        {[...Array(25)].map((tile, i) => (
+        {[...Array(25)].map((improvements, i) => (
           <Tile
             key={i}
-            // improvement={improvement}
+            improvements={improvements}
             OnClick={(e: MouseEvent) => handleClick(e, i)}
           />
         ))}
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
-          OnAdd={formData => OnAdd(formData)}
+          OnAdd={(i,formData) => {
+            OnAdd(i, formData), setIsAddVisible("hidden");
+          }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
-          
         />
       </div>
       <div style={{ visibility: `${isEditVisible}` }}>
         <EditImprovementDialog
-          OnUpgrade={() => handleUpgrade}
-          OnDowngrade={() => handleDowngrade}
+          OnUpgrade={(i) => {OnUpgrade(i)}}
+          OnDowngrade={(i) => {OnDowngrade(i)}}
           OnClose={() => setIsAddVisible("hidden")}
           OnRemove={() => handleRemove}
           typeOptions={typeOptions}

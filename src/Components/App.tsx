@@ -5,18 +5,13 @@ import { Resource } from "../Models/Resource";
 import { Improvement } from "../Models/Improvement";
 import "../StyleSheets/App.css";
 import { ResourceLine } from "./ResourceLine";
-import PersonIcon from '../Assets/PersonIcon.png';
-import LumberIcon from '../Assets/LumberIcon.png';
-import GrainIcon from '../Assets/GrainIcon.png';
-import WaterIcon from '../Assets/WaterIcon.png';
-import SheepIcon from '../Assets/SheepIcon.png'
+import PersonIcon from "../assets/PersonIcon.png";
+import LumberIcon from "../assets/LumberIcon.png";
+import GrainIcon from "../assets/GrainIcon.png";
+import WaterIcon from "../assets/WaterIcon.png";
+import SheepIcon from "../assets/SheepIcon.png";
 
 export function App() {
-  const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
-  function handleAdd( chosenImprovement : any) {
-    setImprovements((prevImprovement) => [...prevImprovement, chosenImprovement]);
-    console.log(improvements)
-  }
   const [resources, setResources] = useState<Resource[]>([
     {
       icon: PersonIcon,
@@ -44,10 +39,68 @@ export function App() {
       amount: 1,
     },
   ]);
+  const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
+  function handleAdd(i: number, chosenImprovement: ImprovementOption) {
+    handleCost(i, chosenImprovement);
+    setImprovements((prevImprovement) => [
+      ...prevImprovement,
+      chosenImprovement,
+    ]);
 
+    if (chosenImprovement.improvement === "House") {
+    } else if (chosenImprovement.improvement === "Field") {
+    } else if (chosenImprovement.improvement === "Pasture") {
+    } else if (chosenImprovement.improvement === "Lumber Mill") {
+    } else if (chosenImprovement.improvement === "Well") {
+    }
+  }
+  function handleCost(i: number, chosenImprovement: ImprovementOption) {
+    setResources((prevResources) => {
+      const prevResource = prevResources[i];
+      let newResources = { ...prevResource };
+      chosenImprovement.cost.forEach((cost) => {
+        newResources.amount -= cost.quantity;
+      });
+      return [
+        ...prevResources.slice(0, i),
+        newResources,
+        ...prevResources.slice(i + 1),
+      ];
+    });
+  }
+  function handleUpgrade(i: number) {
+    setImprovements((prevLevels) => {
+      const prevLevel = prevLevels[i];
+      let newLevel = {
+        ...prevLevel,
+        level: prevLevel.level + 1,
+      };
+      return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
+    });
+  }
+  function handleDowngrade(i: number) {
+    setImprovements((prevLevels) => {
+      const prevLevel = prevLevels[i];
+      let newLevel = {
+        ...prevLevel,
+        level: prevLevel.level - 1,
+      };
+      return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
+    });
+  }
+  console.log(improvements);
   return (
     <div>
-      <Map OnAdd = {handleAdd} />
+      <Map
+        improvements={improvements}
+        OnAdd={handleAdd}
+        OnUpgrade={(i) => {
+          handleUpgrade(i);
+        }}
+        OnDowngrade={(i) => {
+          handleDowngrade(i);
+        }}
+      />
       <ResourceView resources={resources} />
     </div>
   );

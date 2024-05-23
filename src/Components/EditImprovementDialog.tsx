@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import "../StyleSheets/EditImprovementDialog.css";
 import { Improvement } from "../Models/Improvement";
 import { Resource } from "../Models/Resource";
 interface EditImprovementDialogProp {
   OnClose: () => void;
-  OnUpgrade: () => void;
-  OnDowngrade: () => void;
+  OnUpgrade: (i :number) => void;
+  OnDowngrade: (i:number) => void;
   OnRemove: () => void;
   typeOptions: ImprovementOption[];
 }
@@ -17,10 +17,11 @@ export function EditImprovementDialog({
   OnRemove,
   typeOptions,
 }: EditImprovementDialogProp) {
-  console.log("");
-
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+  }
   return (
-    <div className="editFrom" id="editImprovementBox">
+    <form className="editFrom" id="editImprovementBox" onSubmit={handleSubmit}>
       <div id="editImprovementLabels">
         <label>Type</label>
         <label>Level</label>
@@ -33,6 +34,6 @@ export function EditImprovementDialog({
         <button onClick={OnDowngrade}>Downgrade</button>
         <button onClick={OnRemove}>Remove</button>
       </div>
-    </div>
+    </form>
   );
 }
