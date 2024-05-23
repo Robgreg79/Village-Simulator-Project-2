@@ -23,7 +23,7 @@ export function Tile({ improvements, OnClick }: TileProps) {
               className={improvements.improvement}
               src={improvements.icon}
             ></img>
-          </div>
+          {improvements.level}</div>
         )}
       </div>
     </>

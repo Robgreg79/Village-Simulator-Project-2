@@ -40,30 +40,34 @@ export function App() {
     },
   ]);
   const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
-  function handleAdd(chosenImprovement: ImprovementOption) {
-    setImprovements((prevImprovement) => [
-      ...prevImprovement,
-      chosenImprovement,
-    ]);
+  function handleAdd(chosenImprovement: ImprovementOption, index: number) {
+    
+    setImprovements((prevImprovement) => {
+      const updatedImprovements = [...prevImprovement];
+      updatedImprovements[index] = chosenImprovement;
+      return updatedImprovements;
+    });
+    handleCost(index, chosenImprovement)
   }
-  //   // handleCost(i, chosenImprovement)
+  
+ 
+ 
+  function handleCost(i: number, chosenImprovement: ImprovementOption) {
+    setResources((prevResources) => {
+      const prevResource = prevResources[i];
+      let newResources = { ...prevResource };
+    
+      chosenImprovement.cost.forEach((cost) => {
+        newResources.amount -= cost.quantity;
+      });
+      return [
+        ...prevResources.slice(0, i),
+        newResources,
+        ...prevResources.slice(i + 1),
+      ];
+    });
+  }
 
-  // }
-  // // function handleCost(i: number, chosenImprovement: ImprovementOption) {
-  // //   setResources((prevResources) => {
-  // //     const prevResource = prevResources[i];
-  // //     let newResources = { ...prevResource ,
-  // //     amount: prevResource.amount - chosenImprovement.cost. }
-  //     // chosenImprovement.cost.forEach((cost) => {
-  //     //   newResources.amount -= cost.quantity;
-  //     // });
-  //   //   return [
-  //   //     ...prevResources.slice(0, i),
-  //   //     newResources,
-  //   //     ...prevResources.slice(i + 1),
-  //   //   ];
-  //   // });
-  // // }
   function handleUpgrade(i: number) {
     setImprovements((prevLevels) => {
       const prevLevel = prevLevels[i];

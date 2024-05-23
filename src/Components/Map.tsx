@@ -12,7 +12,7 @@ import WellIcon from "../assets/WellIcon.png";
 
 interface MapProps {
   improvements: ImprovementOption[];
-  OnAdd: (chosenImprovement: any) => void;
+  OnAdd: (chosenImprovement: any, i: number) => void;
   OnUpgrade: (i:number) => void;
   OnDowngrade: (i:number)=> void
 }
@@ -25,7 +25,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     {
       icon: HouseIcon,
       improvement: "House",
-      level: 0,
+      level: 1,
       resourcesProduced: {
         quantity: 5,
         type: "Person",
@@ -52,7 +52,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     {
       icon: FieldIcon,
       improvement: "Field",
-      level: 0,
+      level: 1,
       resourcesProduced: {
         quantity: 10,
         type: "Grain",
@@ -71,7 +71,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     {
       icon: PastureIcon,
       improvement: "Pasture",
-      level: 0,
+      level: 1,
       resourcesProduced: {
         quantity: 5,
         type: "Sheep",
@@ -94,7 +94,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     {
       icon: LumberMillIcon,
       improvement: "Lumber Mill",
-      level: 0,
+      level: 1,
       resourcesProduced: {
         quantity: 10,
         type: "Lumber",
@@ -109,7 +109,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     {
       icon: WellIcon,
       improvement: "Well",
-      level: 0,
+      level: 1,
       resourcesProduced: {
         quantity: 10,
         type: "Water",
@@ -128,7 +128,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
   ];
 
   const handleClick = (e: MouseEvent, i: any) => {
-    console.log(e);
+    
     if ((e.target as HTMLElement).className === "noImprovements") {
       setIsAddVisible("visible");
       setClickedI(i)
@@ -156,7 +156,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
           OnAdd={(improvement) => {
-            OnAdd(improvement), setIsAddVisible("hidden");
+            OnAdd(improvement, clickedI), setIsAddVisible("hidden");
           }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
