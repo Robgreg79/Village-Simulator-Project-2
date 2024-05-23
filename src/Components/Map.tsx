@@ -140,8 +140,11 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: Ma
       setClickedI(i)
     }
   };
-
-  console.log(clickedI)
+function handleSendAdd(improvement: ImprovementOption): void {
+  OnAdd(improvement, clickedI);
+  setIsAddVisible("hidden");
+}
+console.log(clickedI);
   return (
     <>
       <div id="map">
@@ -155,9 +158,10 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: Ma
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
-          OnAdd={(improvement) => {
-            OnAdd(improvement, clickedI), setIsAddVisible("hidden");
-          }}
+          OnAdd={handleSendAdd}
+          // {(improvement) => {
+            // OnAdd(improvement, clickedI), setIsAddVisible("hidden");
+          // }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
         />
@@ -167,7 +171,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: Ma
           OnUpgrade={() => {OnUpgrade(clickedI)}}
           OnDowngrade={() => {OnDowngrade(clickedI)}}
           OnClose={() => setIsEditVisible("hidden")}
-          OnRemove={() =>{OnRemove(clickedI)}}
+          OnRemove={() => {OnRemove(clickedI), setIsEditVisible("hidden")}}
           typeOptions={typeOptions}
           improvements={improvements}
         />

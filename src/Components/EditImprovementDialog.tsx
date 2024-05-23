@@ -8,7 +8,7 @@ interface EditImprovementDialogProp {
   OnUpgrade: () => void;
   OnDowngrade: () => void;
   OnRemove: () => void;
-  typeOptions: ImprovementOption[];
+  
   improvements: ImprovementOption;
 }
 
@@ -17,7 +17,6 @@ export function EditImprovementDialog({
   OnUpgrade,
   OnDowngrade,
   OnRemove,
-  typeOptions,
   improvements
 }: EditImprovementDialogProp) {
   function handleSubmit(e: FormEvent) {
