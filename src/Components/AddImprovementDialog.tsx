@@ -33,6 +33,7 @@ export function AddImprovementDialog({
       <option value="Lumber Mill">Lumber Mill</option>
       <option value="Well">Well</option>
     </select><br />
+    <img id="typeIcon" style={{height: '60px', padding: '8px'}} src={formData.icon} /> <br/>
     <label htmlFor="benefit">Benefit</label><br /> 
     <p>{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</p>
     <label htmlFor="cost">Cost</label><br />
