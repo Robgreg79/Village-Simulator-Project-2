@@ -25,6 +25,7 @@ export function AddImprovementDialog({
   
   return (
     <form onSubmit={handleSubmit} className="addForm">
+<<<<<<< HEAD
     <label htmlFor="type">Improvement Type</label><br />
     <select name="type" id="type" onChange={(value) => setFormData(typeOptions.find(option => value.target.value === option.improvement))}>
       <option value="House">House</option>
@@ -46,6 +47,36 @@ export function AddImprovementDialog({
       <button id="add" type="submit" onClick= {OnAdd}>
         Add
       </button>
+=======
+      <div className="form-row">
+        <label className="form-left-side" htmlFor="type">Type</label>
+        <select className="form-right-side" name="type" id="type" onChange={(e) => setFormData(typeOptions.find(option => e.target.value === option.improvement))}>
+          {typeOptions.map(option => (
+            <option key={option.improvement} value={option.improvement}>{option.improvement}</option>
+          ))}
+        </select>
+      </div>
+      <div className="form-row">
+        <label className="form-left-side" htmlFor="benefit">Benefit</label>
+        <span className="form-right-side">{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</span>
+      </div>
+      <div className="form-row">
+        <label className="form-left-side" htmlFor="cost">Cost</label>
+        <ul className="form-right-side">
+          {formData.cost.map((costItem, index) => (
+            <li key={index}>{costItem.quantity} {costItem.type}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="form-row">
+        <button className="cancel" type="button" onClick={OnCancel}>
+          Cancel
+        </button>
+        <button type="submit">
+          Add
+        </button>
+      </div>
+>>>>>>> 6c86309d23dd54f9c6895a00d67eeb7ddd8ca9aa
     </form>
   );
 }
