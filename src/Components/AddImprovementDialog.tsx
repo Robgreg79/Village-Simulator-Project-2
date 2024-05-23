@@ -25,7 +25,7 @@ export function AddImprovementDialog({
   
   return (
     <form onSubmit={handleSubmit} className="addForm">
-    <label htmlFor="type">Type</label><br />
+    <label htmlFor="type">Improvement Type</label><br />
     <select name="type" id="type" onChange={(value) => setFormData(typeOptions.find(option => value.target.value === option.improvement))}>
       <option value="House">House</option>
       <option value="Field">Field</option>
