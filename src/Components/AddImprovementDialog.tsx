@@ -56,7 +56,7 @@ export function AddImprovementDialog({
           <h4>Benefit</h4>
           <br />
           <p>
-            {improvement.resourcesProduced.quantity}{" "}
+            {improvement.resourcesProduced.quantity}
             {improvement.resourcesProduced.type}
           </p>
         </div>

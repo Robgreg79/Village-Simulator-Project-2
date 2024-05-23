@@ -13,12 +13,18 @@ import WellIcon from "../assets/WellIcon.png";
 interface MapProps {
   improvements: ImprovementOption[];
   OnAdd: (chosenImprovement: any, i: number) => void;
-  OnUpgrade: (i:number) => void;
-  OnDowngrade: (i:number)=> void
-  OnRemove:(i:number) => void
+  OnUpgrade: (i: number) => void;
+  OnDowngrade: (i: number) => void;
+  OnRemove: (i: number) => void;
 }
 type Visibility = "visible" | "hidden";
-export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: MapProps) {
+export function Map({
+  OnAdd,
+  OnUpgrade,
+  OnDowngrade,
+  OnRemove,
+  improvements,
+}: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
   const [clickedI, setClickedI] = useState<number>(0);
@@ -129,22 +135,19 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: Ma
   ];
 
   const handleClick = (e: MouseEvent, i: any) => {
-    
     if ((e.target as HTMLElement).className === "noImprovements") {
       setIsAddVisible("visible");
-      setClickedI(i)
-      
-      
+      setClickedI(i);
     } else {
       setIsEditVisible("visible");
-      setClickedI(i)
+      setClickedI(i);
     }
   };
-function handleSendAdd(improvement: ImprovementOption): void {
-  OnAdd(improvement, clickedI);
-  setIsAddVisible("hidden");
-}
-console.log(clickedI);
+  function handleSendAdd(improvement: ImprovementOption): void {
+    OnAdd(improvement, clickedI);
+    setIsAddVisible("hidden");
+  }
+  console.log(clickedI);
   return (
     <>
       <div id="map">
@@ -154,30 +157,33 @@ console.log(clickedI);
             improvements={improvements[i]}
             OnClick={(e: MouseEvent) => handleClick(e, i)}
           />
-         ))} 
+        ))}
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
           OnAdd={handleSendAdd}
           // {(improvement) => {
-            // OnAdd(improvement, clickedI), setIsAddVisible("hidden");
+          // OnAdd(improvement, clickedI), setIsAddVisible("hidden");
           // }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
         />
       </div>
+
       <div style={{ visibility: `${isEditVisible}` }}>
         <EditImprovementDialog
-          OnUpgrade={() => {OnUpgrade(clickedI)}}
-          OnDowngrade={() => {OnDowngrade(clickedI)}}
+          OnUpgrade={() => {
+            OnUpgrade(clickedI);
+          }}
+          OnDowngrade={() => {
+            OnDowngrade(clickedI);
+          }}
           OnClose={() => setIsEditVisible("hidden")}
-          OnRemove={() => {OnRemove(clickedI), setIsEditVisible("hidden")}}
-          typeOptions={typeOptions}
-          improvements={improvements}
+          OnRemove={() => {
+            OnRemove(clickedI), setIsEditVisible("hidden");
+          }}
         />
       </div>
     </>
-    
   );
-
 }

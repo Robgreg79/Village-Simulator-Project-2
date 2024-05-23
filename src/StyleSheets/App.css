@@ -3,7 +3,10 @@
     font-weight: 400;
     font-style: normal;
 }
-
+#MapNTAble{
+    display: flex;
+    flex-direction: row;
+}
 button {
     width: 100px;
     margin-right: 10px;

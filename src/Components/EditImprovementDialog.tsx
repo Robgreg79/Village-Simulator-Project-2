@@ -8,8 +8,6 @@ interface EditImprovementDialogProp {
   OnUpgrade: () => void;
   OnDowngrade: () => void;
   OnRemove: () => void;
-  
-  improvements: ImprovementOption;
 }
 
 export function EditImprovementDialog({
@@ -17,7 +15,6 @@ export function EditImprovementDialog({
   OnUpgrade,
   OnDowngrade,
   OnRemove,
-  improvements
 }: EditImprovementDialogProp) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -33,7 +30,7 @@ export function EditImprovementDialog({
       <div id="editImprovementButtons">
         <button onClick={OnClose}>Close</button>
         <button onClick={OnUpgrade}>Upgrade</button>
-        <button  disabled= {improvements.level === 1} onClick={OnDowngrade}>Downgrade</button>
+        <button onClick={OnDowngrade}>Downgrade</button>
         <button onClick={OnRemove}>Remove</button>
       </div>
     </form>
