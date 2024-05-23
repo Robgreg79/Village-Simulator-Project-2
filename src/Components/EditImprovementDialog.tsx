@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../StyleSheets/EditImprovementDialog.css";
 import { Improvement } from "../Models/Improvement";
 import { Resource } from "../Models/Resource";
+
 interface EditImprovementDialogProp {
   OnClose: () => void;
   OnUpgrade: () => void;
@@ -20,7 +21,7 @@ export function EditImprovementDialog({
   console.log("");
 
   return (
-    <div className="editFrom" id="editImprovementBox">
+    <div className="editForm" id="editImprovementBox">
       <div id="editImprovementLabels">
         <label>Type</label>
         <label>Level</label>
