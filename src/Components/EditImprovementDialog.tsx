@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import "../StyleSheets/EditImprovementDialog.css";
 import { Improvement } from "../Models/Improvement";
 import { Resource } from "../Models/Resource";
+
 interface EditImprovementDialogProp {
   OnClose: () => void;
   OnUpgrade: (i :number) => void;

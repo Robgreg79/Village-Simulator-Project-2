@@ -1,0 +1,25 @@
+* {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button {
+    width: 100px;
+    margin-right: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgb(215, 241, 166);
+    border-radius: 10px;
+    border: 7px double 
+}
+
+button.cancel {
+    background-color: rgb(187, 187, 187);
+}
+
+button:hover {
+    background-color: #77ace8;
+    color: white;
+}

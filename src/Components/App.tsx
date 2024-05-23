@@ -16,7 +16,7 @@ export function App() {
     {
       icon: PersonIcon,
       type: "People",
-      amount: 1,
+      amount: 5,
     },
     {
       icon: LumberIcon,

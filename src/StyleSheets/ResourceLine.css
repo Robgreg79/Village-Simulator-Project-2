@@ -1,13 +1,13 @@
 .resource-line {
     padding: 5px;
     font-size: medium;
-    align-items: center;
+    align-content: center;
 }
 
 td {
-    align-items: center;
+    border-bottom: 2px solid black;
 }
 
-tr {
-    align-items: center;
-}
+/* .resource-right {
+    align-items: right;
+} */
