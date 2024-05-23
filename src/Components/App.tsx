@@ -41,39 +41,99 @@ export function App() {
   ]);
   const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
   function handleAdd(chosenImprovement: ImprovementOption, index: number) {
-    
+    handleCost(chosenImprovement);
+    handleBenefits(chosenImprovement);
     setImprovements((prevImprovement) => {
       const updatedImprovements = [...prevImprovement];
       updatedImprovements[index] = chosenImprovement;
       return updatedImprovements;
     });
-    handleCost(index, chosenImprovement)
   }
-  
- 
- 
-  function handleCost(i: number, chosenImprovement: ImprovementOption) {
+
+  function handleCost(chosenImprovement: ImprovementOption) {
     setResources((prevResources) => {
-      const prevResource = prevResources[i];
-      let newResources = { ...prevResource };
-    
-      chosenImprovement.cost.forEach((cost) => {
-        newResources.amount -= cost.quantity;
-      });
-      return [
-        ...prevResources.slice(0, i),
-        newResources,
-        ...prevResources.slice(i + 1),
-      ];
+      const updatedResources = [...prevResources];
+
+      if (chosenImprovement.improvement === "House") {
+        updatedResources[1].amount -= chosenImprovement.cost[0].quantity;
+        updatedResources[2].amount -= chosenImprovement.cost[1].quantity;
+        updatedResources[3].amount -= chosenImprovement.cost[2].quantity;
+        updatedResources[4].amount -= chosenImprovement.cost[3].quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Field") {
+        updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
+        updatedResources[3].amount -= chosenImprovement.cost[1].quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Pasture") {
+        updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
+        updatedResources[2].amount -= chosenImprovement.cost[1].quantity;
+        updatedResources[3].amount -= chosenImprovement.cost[2].quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Lumber Mill") {
+        updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Well") {
+        updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
+        updatedResources[1].amount -= chosenImprovement.cost[1].quantity;
+        return updatedResources;
+      }
     });
   }
+  function handleBenefits(chosenImprovement: ImprovementOption) {
+    setResources((prevResources) => {
+      const updatedResources = [...prevResources];
+      if (chosenImprovement.improvement === "House") {
+        updatedResources[0].amount +=
+          chosenImprovement.resourcesProduced.quantity;
+
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Field") {
+        updatedResources[2].amount +=
+          chosenImprovement.resourcesProduced.quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Pasture") {
+        updatedResources[4].amount +=
+          chosenImprovement.resourcesProduced.quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Lumber Mill") {
+        updatedResources[1].amount +=
+          chosenImprovement.resourcesProduced.quantity;
+      } else if (chosenImprovement.improvement === "Well") {
+        updatedResources[3].amount +=
+          chosenImprovement.resourcesProduced.quantity;
+      }
+    });
+  }
+
+  // setResources((prevResources) => {
+  //   const updatedResources = [...prevResources];
+  //   chosenImprovement.cost.forEach((cost) => {
+  //     const index = updatedResources.findIndex((resource) => resource.type === cost.type);
+  //     updatedResources[index].amount -= cost.quantity;
+  //   });
+  //   return updatedResources;
+  // })};
+  //   setResources((prevResources) => {
+  //     const resourceIndex = prevResources.findIndex(
+  //       (resource) => resource.type === chosenImprovement.cost[].type
+  //     );
+  //     let updatedResource = { ...prevResources[resourceIndex] };
+  //     chosenImprovement.cost.forEach((cost) => {
+  //       updatedResource.amount -= cost.quantity;
+  //     });
+  //     const updatedResources = [...prevResources];
+  //     updatedResources[resourceIndex] = updatedResource;
+
+  //     return updatedResources;
+  //   });
+  // }
 
   function handleUpgrade(i: number) {
     setImprovements((prevLevels) => {
       const prevLevel = prevLevels[i];
       let newLevel = {
         ...prevLevel,
-        level: prevLevel.level ++,
+        level: prevLevel.level++,
       };
       return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
     });
@@ -83,14 +143,15 @@ export function App() {
       const prevLevel = prevLevels[i];
       let newLevel = {
         ...prevLevel,
-        level: prevLevel.level - 1,
+        level: prevLevel.level--,
       };
       return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
     });
   }
+
   console.log(improvements);
   console.log(resources);
-  
+
   return (
     <div>
       <Map
