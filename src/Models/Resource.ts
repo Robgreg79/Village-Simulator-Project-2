@@ -1,5 +1,5 @@
 export interface Resource {
-    icon?: string,
-    type: string,
-    amount: number
+  icon?: string;
+  type: string;
+  amount: number;
 }

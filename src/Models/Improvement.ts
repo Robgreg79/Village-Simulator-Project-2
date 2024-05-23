@@ -1,4 +1,4 @@
 export interface Improvement {
-    type: string;
-    level: number 
+  type: string;
+  level: number;
 }

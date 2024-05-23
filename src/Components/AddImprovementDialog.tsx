@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Resource } from "../Models/Resource";
+
 import "../StyleSheets/AddImprovementDialog.css";
 
 interface AddImprovementDialogProps {

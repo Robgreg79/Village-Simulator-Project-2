@@ -1,9 +1,9 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Tile } from "./Tile";
 import "../StyleSheets/Map.css";
 import { AddImprovementDialog } from "./AddImprovementDialog";
 import { EditImprovementDialog } from "./EditImprovementDialog";
-import { Improvement } from "../Models/Improvement";
+
 import HouseIcon from "../assets/HouseIcon.png";
 import FieldIcon from "../assets/FieldIcon.png";
 import PastureIcon from "../assets/PastureIcon.png";

@@ -1,7 +1,7 @@
 import { ResourceLine } from "./ResourceLine";
-import { useState } from "react";
+
 import { Resource } from "../Models/Resource";
-import '../StyleSheets/ResourceView.css'
+import "../StyleSheets/ResourceView.css";
 
 export function ResourceView({ resources }: { resources: Resource[] }) {
   return (
