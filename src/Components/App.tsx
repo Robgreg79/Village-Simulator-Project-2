@@ -59,24 +59,25 @@ export function App() {
         updatedResources[2].amount -= chosenImprovement.cost[1].quantity;
         updatedResources[3].amount -= chosenImprovement.cost[2].quantity;
         updatedResources[4].amount -= chosenImprovement.cost[3].quantity;
-        return updatedResources;
+ 
       } else if (chosenImprovement.improvement === "Field") {
         updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
         updatedResources[3].amount -= chosenImprovement.cost[1].quantity;
-        return updatedResources;
+
       } else if (chosenImprovement.improvement === "Pasture") {
         updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
         updatedResources[2].amount -= chosenImprovement.cost[1].quantity;
         updatedResources[3].amount -= chosenImprovement.cost[2].quantity;
-        return updatedResources;
+
       } else if (chosenImprovement.improvement === "Lumber Mill") {
         updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
-        return updatedResources;
+        
       } else if (chosenImprovement.improvement === "Well") {
         updatedResources[0].amount -= chosenImprovement.cost[0].quantity;
         updatedResources[1].amount -= chosenImprovement.cost[1].quantity;
-        return updatedResources;
+        
       }
+      return updatedResources;
     });
   }
   function handleBenefits(chosenImprovement: ImprovementOption) {
@@ -86,7 +87,7 @@ export function App() {
         updatedResources[0].amount +=
           chosenImprovement.resourcesProduced.quantity;
 
-        return updatedResources;
+        
       } else if (chosenImprovement.improvement === "Field") {
         updatedResources[2].amount +=
           chosenImprovement.resourcesProduced.quantity;
@@ -94,7 +95,7 @@ export function App() {
       } else if (chosenImprovement.improvement === "Pasture") {
         updatedResources[4].amount +=
           chosenImprovement.resourcesProduced.quantity;
-        return updatedResources;
+        
       } else if (chosenImprovement.improvement === "Lumber Mill") {
         updatedResources[1].amount +=
           chosenImprovement.resourcesProduced.quantity;
@@ -102,6 +103,7 @@ export function App() {
         updatedResources[3].amount +=
           chosenImprovement.resourcesProduced.quantity;
       }
+      return updatedResources;
     });
   }
 
