@@ -11,11 +11,15 @@ button {
     margin-bottom: 15px;
     padding: 10px;
     background-color: rgb(215, 241, 166);
-    color: white;
     border-radius: 10px;
     border: 7px double 
 }
 
+button.cancel {
+    background-color: rgb(187, 187, 187);
+}
+
 button:hover {
     background-color: #77ace8;
+    color: white;
 }
