@@ -12,7 +12,7 @@ import WellIcon from "../assets/WellIcon.png";
 
 interface MapProps {
   improvements: ImprovementOption[];
-  OnAdd: (i:number , chosenImprovement: any) => void;
+  OnAdd: (chosenImprovement: any) => void;
   OnUpgrade: (i:number) => void;
   OnDowngrade: (i:number)=> void
 }
@@ -155,8 +155,8 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
-          OnAdd={(formData) => {
-            OnAdd(clickedI, formData), setIsAddVisible("hidden");
+          OnAdd={(improvement) => {
+            OnAdd(improvement), setIsAddVisible("hidden");
           }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
@@ -166,7 +166,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
         <EditImprovementDialog
           OnUpgrade={() => {OnUpgrade(clickedI)}}
           OnDowngrade={() => {OnDowngrade(clickedI)}}
-          OnClose={() => setIsAddVisible("hidden")}
+          OnClose={() => setIsEditVisible("hidden")}
           OnRemove={() =>{handleRemove}}
           typeOptions={typeOptions}
           improvements={improvements}

@@ -13,12 +13,12 @@ export function AddImprovementDialog({
   OnCancel,
   typeOptions,
 }: AddImprovementDialogProps) {
-  const [formData, setFormData] = useState<ImprovementOption>(typeOptions[0]);
+  const [improvement, setImprovement] = useState<ImprovementOption>(typeOptions[0]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
-    console.log(formData);
+    OnAdd( improvement )
+    console.log(improvement);
   }
 
   return (
@@ -29,10 +29,10 @@ export function AddImprovementDialog({
         name="type"
         id="type"
         onChange={(value) =>
-          setFormData(
+          setImprovement(
             typeOptions.find(
               (option) => value.target.value === option.improvement
-            )
+            ) || typeOptions[0] 
           )
         }
       >
@@ -46,62 +46,31 @@ export function AddImprovementDialog({
       <img
         id="typeIcon"
         style={{ height: "60px", padding: "8px" }}
-        src={formData.icon}
+        src={improvement.icon}
       />{" "}
       <br />
       <label htmlFor="benefit">Benefit</label>
       <br />
       <p>
-        {formData.resourcesProduced.quantity} {formData.resourcesProduced.type}
+        {improvement.resourcesProduced.quantity} {improvement.resourcesProduced.type}
       </p>
       <label htmlFor="cost">Cost</label>
       <br />
-      {formData.cost.map((costItem: ResourceCost, index: number) => (
+      {improvement.cost.map((costItem: ResourceCost, index: number) => (
         <p key={index}>
           {costItem.quantity} {costItem.type}
         </p>
       ))}
-      <button id="cancel" type="submit" onClick={OnCancel}>
+      <button id="cancel" type= "button" onClick={OnCancel}>
         Cancel
       </button>
       <button
         id="add"
         type="submit"
-        onClick={() => {
-          OnAdd({ formData });
-        }}
       >
         Add
       </button>
-      {/* =
-      <div className="form-row">
-        <label className="form-left-side" htmlFor="type">Type</label>
-        <select className="form-right-side" name="type" id="type" onChange={(e) => setFormData(typeOptions.find(option => e.target.value === option.improvement))}>
-          {typeOptions.map(option => (
-            <option key={option.improvement} value={option.improvement}>{option.improvement}</option>
-          ))}
-        </select>
-      </div>
-      <div className="form-row">
-        <label className="form-left-side" htmlFor="benefit">Benefit</label>
-        <span className="form-right-side">{formData.resourcesProduced.quantity} {formData.resourcesProduced.type}</span>
-      </div>
-      <div className="form-row">
-        <label className="form-left-side" htmlFor="cost">Cost</label>
-        <ul className="form-right-side">
-          {formData.cost.map((costItem, index) => (
-            <li key={index}>{costItem.quantity} {costItem.type}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="form-row">
-        <button className="cancel" type="button" onClick={OnCancel}>
-          Cancel
-        </button>
-        <button type="submit">
-          Add
-        </button>
-      </div> */}
+    
     </form>
   );
 }

@@ -40,35 +40,36 @@ export function App() {
     },
   ]);
   const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
-  function handleAdd(i: number, chosenImprovement: ImprovementOption) {
+  function handleAdd(chosenImprovement: ImprovementOption) {
     setImprovements((prevImprovement) => [
       ...prevImprovement,
       chosenImprovement,
     ]);
-    // handleCost(i, chosenImprovement
+  }
+  //   // handleCost(i, chosenImprovement)
 
-  }
-  function handleCost(i: number, chosenImprovement: ImprovementOption) {
-    setResources((prevResources) => {
-      const prevResource = prevResources[i];
-      let newResources = { ...prevResource ,
-      amount: prevResource }
-      // chosenImprovement.cost.forEach((cost) => {
-      //   newResources.amount -= cost.quantity;
-      // });
-      return [
-        ...prevResources.slice(0, i),
-        newResources,
-        ...prevResources.slice(i + 1),
-      ];
-    });
-  }
+  // }
+  // // function handleCost(i: number, chosenImprovement: ImprovementOption) {
+  // //   setResources((prevResources) => {
+  // //     const prevResource = prevResources[i];
+  // //     let newResources = { ...prevResource ,
+  // //     amount: prevResource.amount - chosenImprovement.cost. }
+  //     // chosenImprovement.cost.forEach((cost) => {
+  //     //   newResources.amount -= cost.quantity;
+  //     // });
+  //   //   return [
+  //   //     ...prevResources.slice(0, i),
+  //   //     newResources,
+  //   //     ...prevResources.slice(i + 1),
+  //   //   ];
+  //   // });
+  // // }
   function handleUpgrade(i: number) {
     setImprovements((prevLevels) => {
       const prevLevel = prevLevels[i];
       let newLevel = {
         ...prevLevel,
-        level: prevLevel.level + 1,
+        level: prevLevel.level ++,
       };
       return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
     });
@@ -85,6 +86,7 @@ export function App() {
   }
   console.log(improvements);
   console.log(resources);
+  
   return (
     <div>
       <Map

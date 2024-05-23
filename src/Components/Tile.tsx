@@ -19,7 +19,7 @@ export function Tile({ improvements, OnClick }: TileProps) {
         {improvements && (
           <div className="improvement">
             <span className={improvements.improvement} />
-            <img
+            <img style={{height: '40px', padding: '3px'}}
               className={improvements.improvement}
               src={improvements.icon}
             ></img>
@@ -29,3 +29,4 @@ export function Tile({ improvements, OnClick }: TileProps) {
     </>
   );
 }
+0
