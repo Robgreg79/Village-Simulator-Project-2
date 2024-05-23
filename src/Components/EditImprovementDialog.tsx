@@ -34,7 +34,7 @@ export function EditImprovementDialog({
       <div id="editImprovementButtons">
         <button onClick={OnClose}>Close</button>
         <button onClick={OnUpgrade}>Upgrade</button>
-        <button  disabled={improvements.level === 1} onClick={OnDowngrade}>Downgrade</button>
+        <button  disabled= {improvements.level === 1} onClick={OnDowngrade}>Downgrade</button>
         <button onClick={OnRemove}>Remove</button>
       </div>
     </form>

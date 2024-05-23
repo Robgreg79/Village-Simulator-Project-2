@@ -15,9 +15,10 @@ interface MapProps {
   OnAdd: (chosenImprovement: any, i: number) => void;
   OnUpgrade: (i:number) => void;
   OnDowngrade: (i:number)=> void
+  OnRemove:(i:number) => void
 }
 type Visibility = "visible" | "hidden";
-export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
+export function Map({ OnAdd, OnUpgrade,OnDowngrade, OnRemove, improvements }: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
   const [clickedI, setClickedI] = useState<number>(0);
@@ -140,7 +141,6 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
     }
   };
 
-  function handleRemove() {}
   console.log(clickedI)
   return (
     <>
@@ -167,7 +167,7 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
           OnUpgrade={() => {OnUpgrade(clickedI)}}
           OnDowngrade={() => {OnDowngrade(clickedI)}}
           OnClose={() => setIsEditVisible("hidden")}
-          OnRemove={() =>{handleRemove}}
+          OnRemove={() =>{OnRemove(clickedI)}}
           typeOptions={typeOptions}
           improvements={improvements}
         />

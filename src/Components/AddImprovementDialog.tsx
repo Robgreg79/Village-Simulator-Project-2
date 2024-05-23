@@ -13,11 +13,13 @@ export function AddImprovementDialog({
   OnCancel,
   typeOptions,
 }: AddImprovementDialogProps) {
-  const [improvement, setImprovement] = useState<ImprovementOption>(typeOptions[0]);
+  const [improvement, setImprovement] = useState<ImprovementOption>(
+    typeOptions[0]
+  );
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    OnAdd( improvement )
+    OnAdd(improvement);
     console.log(improvement);
   }
 
@@ -32,7 +34,7 @@ export function AddImprovementDialog({
           setImprovement(
             typeOptions.find(
               (option) => value.target.value === option.improvement
-            ) || typeOptions[0] 
+            ) || typeOptions[0]
           )
         }
       >
@@ -45,32 +47,35 @@ export function AddImprovementDialog({
       <br />
       <img
         id="typeIcon"
-        style={{ height: "60px", padding: "8px" }}
+        style={{ height: "60px", width: "60px", padding: "8px" }}
         src={improvement.icon}
       />{" "}
       <br />
-      <label htmlFor="benefit">Benefit</label>
-      <br />
-      <p>
-        {improvement.resourcesProduced.quantity} {improvement.resourcesProduced.type}
-      </p>
-      <label htmlFor="cost">Cost</label>
-      <br />
-      {improvement.cost.map((costItem: ResourceCost, index: number) => (
-        <p key={index}>
-          {costItem.quantity} {costItem.type}
-        </p>
-      ))}
-      <button id="cancel" type= "button" onClick={OnCancel}>
+      <div className="choiceContainer">
+        <div className="benefitContainer">
+          <h4>Benefit</h4>
+          <br />
+          <p>
+            {improvement.resourcesProduced.quantity}{" "}
+            {improvement.resourcesProduced.type}
+          </p>
+        </div>
+        <div className="costContainer">
+          <h4>Cost</h4>
+          <br />
+          {improvement.cost.map((costItem: ResourceCost, index: number) => (
+            <p key={index}>
+              {costItem.quantity} {costItem.type}
+            </p>
+          ))}
+        </div>
+      </div>
+      <button id="cancel" type="button" onClick={OnCancel}>
         Cancel
       </button>
-      <button
-        id="add"
-        type="submit"
-      >
+      <button id="add" type="submit">
         Add
       </button>
-    
     </form>
   );
 }

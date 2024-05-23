@@ -53,8 +53,8 @@ export function App() {
   function handleCost(chosenImprovement: ImprovementOption) {
     setResources((prevResources) => {
       const updatedResources = [...prevResources];
-
-      if (chosenImprovement.improvement === "House") {
+   
+      if (chosenImprovement.improvement === "House" ) {
         updatedResources[1].amount -= chosenImprovement.cost[0].quantity;
         updatedResources[2].amount -= chosenImprovement.cost[1].quantity;
         updatedResources[3].amount -= chosenImprovement.cost[2].quantity;
@@ -106,6 +106,62 @@ export function App() {
       return updatedResources;
     });
   }
+  function handleCostReturn (chosenImprovement:ImprovementOption){
+    setResources((prevResources) => {
+      const updatedResources = [...prevResources];
+   
+      if (chosenImprovement.improvement === "House" ) {
+        updatedResources[1].amount += chosenImprovement.cost[0].quantity;
+        updatedResources[2].amount += chosenImprovement.cost[1].quantity;
+        updatedResources[3].amount += chosenImprovement.cost[2].quantity;
+        updatedResources[4].amount += chosenImprovement.cost[3].quantity;
+ 
+      } else if (chosenImprovement.improvement === "Field") {
+        updatedResources[0].amount += chosenImprovement.cost[0].quantity;
+        updatedResources[3].amount += chosenImprovement.cost[1].quantity;
+
+      } else if (chosenImprovement.improvement === "Pasture") {
+        updatedResources[0].amount += chosenImprovement.cost[0].quantity;
+        updatedResources[2].amount += chosenImprovement.cost[1].quantity;
+        updatedResources[3].amount += chosenImprovement.cost[2].quantity;
+
+      } else if (chosenImprovement.improvement === "Lumber Mill") {
+        updatedResources[0].amount += chosenImprovement.cost[0].quantity;
+        
+      } else if (chosenImprovement.improvement === "Well") {
+        updatedResources[0].amount += chosenImprovement.cost[0].quantity;
+        updatedResources[1].amount += chosenImprovement.cost[1].quantity;
+        
+      }
+      return updatedResources;
+    });
+  }
+  function handleBenefitsReturn(chosenImprovement: ImprovementOption) {
+    setResources((prevResources) => {
+      const updatedResources = [...prevResources];
+      if (chosenImprovement.improvement === "House") {
+        updatedResources[0].amount ==
+          chosenImprovement.resourcesProduced.quantity;
+
+        
+      } else if (chosenImprovement.improvement === "Field") {
+        updatedResources[2].amount -=
+          chosenImprovement.resourcesProduced.quantity;
+        return updatedResources;
+      } else if (chosenImprovement.improvement === "Pasture") {
+        updatedResources[4].amount -=
+          chosenImprovement.resourcesProduced.quantity;
+        
+      } else if (chosenImprovement.improvement === "Lumber Mill") {
+        updatedResources[1].amount -=
+          chosenImprovement.resourcesProduced.quantity;
+      } else if (chosenImprovement.improvement === "Well") {
+        updatedResources[3].amount -=
+          chosenImprovement.resourcesProduced.quantity;
+      }
+      return updatedResources;
+    });
+  }
 
   // setResources((prevResources) => {
   //   const updatedResources = [...prevResources];
@@ -132,7 +188,10 @@ export function App() {
 
   function handleUpgrade(i: number) {
     setImprovements((prevLevels) => {
+      
       const prevLevel = prevLevels[i];
+      handleCost(prevLevel)
+      handleBenefits(prevLevel)
       let newLevel = {
         ...prevLevel,
         level: prevLevel.level++,
@@ -143,6 +202,7 @@ export function App() {
   function handleDowngrade(i: number) {
     setImprovements((prevLevels) => {
       const prevLevel = prevLevels[i];
+      handleCostReturn(prevLevel)
       let newLevel = {
         ...prevLevel,
         level: prevLevel.level--,
@@ -150,8 +210,13 @@ export function App() {
       return [...prevLevels.slice(0, i), newLevel, ...prevLevels.slice(i + 1)];
     });
   }
-
-  console.log(improvements);
+function handleRemove(i:number){
+  const chosenImprovement = improvements[i];
+  setImprovements(prevImprovement => [...prevImprovement.slice(0,i), ...prevImprovement.slice(i + 1)])
+  handleCostReturn(chosenImprovement)
+  handleBenefitsReturn(chosenImprovement)
+}
+console.log(improvements);
   console.log(resources);
 
   return (
@@ -164,6 +229,9 @@ export function App() {
         }}
         OnDowngrade={(i) => {
           handleDowngrade(i);
+        }}
+        OnRemove= {(i)=>{
+          handleRemove(i);
         }}
       />
 
