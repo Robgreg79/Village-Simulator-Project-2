@@ -1,0 +1,13 @@
+.resource-line {
+    padding: 5px;
+    font-size: medium;
+    align-items: center;
+}
+
+td {
+    align-items: center;
+}
+
+tr {
+    align-items: center;
+}

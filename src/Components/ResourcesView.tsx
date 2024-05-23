@@ -1,11 +1,12 @@
 import { ResourceLine } from "./ResourceLine";
 import { useState } from "react";
 import { Resource } from "../Models/Resource";
+import '../StyleSheets/ResourceView.css'
 
 export function ResourceView({ resources }: { resources: Resource[] }) {
   return (
-    <table>
-      <tr>
+    <table className="resourceTable">
+      <tr className="tableHeader">
         <th>Resource</th>
         <th>Available</th>
       </tr>
