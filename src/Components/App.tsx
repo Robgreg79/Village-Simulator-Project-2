@@ -41,26 +41,21 @@ export function App() {
   ]);
   const [improvements, setImprovements] = useState<ImprovementOption[]>([]);
   function handleAdd(i: number, chosenImprovement: ImprovementOption) {
-    handleCost(i, chosenImprovement);
     setImprovements((prevImprovement) => [
       ...prevImprovement,
       chosenImprovement,
     ]);
+    // handleCost(i, chosenImprovement
 
-    if (chosenImprovement.improvement === "House") {
-    } else if (chosenImprovement.improvement === "Field") {
-    } else if (chosenImprovement.improvement === "Pasture") {
-    } else if (chosenImprovement.improvement === "Lumber Mill") {
-    } else if (chosenImprovement.improvement === "Well") {
-    }
   }
   function handleCost(i: number, chosenImprovement: ImprovementOption) {
     setResources((prevResources) => {
       const prevResource = prevResources[i];
-      let newResources = { ...prevResource };
-      chosenImprovement.cost.forEach((cost) => {
-        newResources.amount -= cost.quantity;
-      });
+      let newResources = { ...prevResource ,
+      amount: prevResource }
+      // chosenImprovement.cost.forEach((cost) => {
+      //   newResources.amount -= cost.quantity;
+      // });
       return [
         ...prevResources.slice(0, i),
         newResources,
@@ -89,6 +84,7 @@ export function App() {
     });
   }
   console.log(improvements);
+  console.log(resources);
   return (
     <div>
       <Map
@@ -101,6 +97,7 @@ export function App() {
           handleDowngrade(i);
         }}
       />
+
       <ResourceView resources={resources} />
     </div>
   );

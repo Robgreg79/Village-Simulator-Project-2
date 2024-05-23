@@ -5,10 +5,11 @@ import { Resource } from "../Models/Resource";
 
 interface EditImprovementDialogProp {
   OnClose: () => void;
-  OnUpgrade: (i :number) => void;
-  OnDowngrade: (i:number) => void;
+  OnUpgrade: () => void;
+  OnDowngrade: () => void;
   OnRemove: () => void;
   typeOptions: ImprovementOption[];
+  improvements: ImprovementOption;
 }
 
 export function EditImprovementDialog({
@@ -17,6 +18,7 @@ export function EditImprovementDialog({
   OnDowngrade,
   OnRemove,
   typeOptions,
+  improvements
 }: EditImprovementDialogProp) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -32,7 +34,7 @@ export function EditImprovementDialog({
       <div id="editImprovementButtons">
         <button onClick={OnClose}>Close</button>
         <button onClick={OnUpgrade}>Upgrade</button>
-        <button onClick={OnDowngrade}>Downgrade</button>
+        <button  disabled={improvements.level === 1} onClick={OnDowngrade}>Downgrade</button>
         <button onClick={OnRemove}>Remove</button>
       </div>
     </form>

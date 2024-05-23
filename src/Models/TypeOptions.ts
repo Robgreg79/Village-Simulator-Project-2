@@ -8,7 +8,7 @@ type ResourceCost = {
   };
   
 interface ImprovementOption {
-//   amount: number;
+
   icon: string;
   improvement: string;
   level: number;

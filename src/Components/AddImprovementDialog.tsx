@@ -2,9 +2,8 @@ import { FormEvent, useState } from "react";
 import { Resource } from "../Models/Resource";
 import "../StyleSheets/AddImprovementDialog.css";
 
-
 interface AddImprovementDialogProps {
-  OnAdd: (i:number, chosen: any) => void;
+  OnAdd: (chosen: any) => void;
   OnCancel: () => void;
   typeOptions: ImprovementOption[];
 }
@@ -24,8 +23,7 @@ export function AddImprovementDialog({
 
   return (
     <form onSubmit={handleSubmit} className="addForm">
-  <<<<<<< HEAD
-    <label htmlFor="type">Improvement Type</label>
+      <label htmlFor="type">Improvement Type</label>
       <br />
       <select
         name="type"
@@ -45,8 +43,13 @@ export function AddImprovementDialog({
         <option value="Well">Well</option>
       </select>
       <br />
-      <img id="typeIcon" style={{height: '60px', padding: '8px'}} src={formData.icon} /> <br/>
-    <label htmlFor="benefit">Benefit</label>
+      <img
+        id="typeIcon"
+        style={{ height: "60px", padding: "8px" }}
+        src={formData.icon}
+      />{" "}
+      <br />
+      <label htmlFor="benefit">Benefit</label>
       <br />
       <p>
         {formData.resourcesProduced.quantity} {formData.resourcesProduced.type}
@@ -65,12 +68,12 @@ export function AddImprovementDialog({
         id="add"
         type="submit"
         onClick={() => {
-          OnAdd( {formData });
+          OnAdd({ formData });
         }}
       >
         Add
       </button>
-=======
+      {/* =
       <div className="form-row">
         <label className="form-left-side" htmlFor="type">Type</label>
         <select className="form-right-side" name="type" id="type" onChange={(e) => setFormData(typeOptions.find(option => e.target.value === option.improvement))}>
@@ -98,8 +101,7 @@ export function AddImprovementDialog({
         <button type="submit">
           Add
         </button>
-      </div>
->>>>>>> 6c86309d23dd54f9c6895a00d67eeb7ddd8ca9aa
+      </div> */}
     </form>
   );
 }

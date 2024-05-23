@@ -12,15 +12,15 @@ import WellIcon from "../assets/WellIcon.png";
 
 interface MapProps {
   improvements: ImprovementOption[];
-  OnAdd: (i:number, chosenImprovement: any) => void;
+  OnAdd: (i:number , chosenImprovement: any) => void;
   OnUpgrade: (i:number) => void;
   OnDowngrade: (i:number)=> void
 }
 type Visibility = "visible" | "hidden";
-export function Map({ OnAdd, OnUpgrade,OnDowngrade }: MapProps) {
+export function Map({ OnAdd, OnUpgrade,OnDowngrade, improvements }: MapProps) {
   const [isAddVisible, setIsAddVisible] = useState<Visibility>("hidden");
   const [isEditVisible, setIsEditVisible] = useState<Visibility>("hidden");
-  const [clickedI, setClickedI] = useState<number | null>(null);
+  const [clickedI, setClickedI] = useState<number>(0);
   const typeOptions: ImprovementOption[] = [
     {
       icon: HouseIcon,
@@ -127,11 +127,13 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade }: MapProps) {
     },
   ];
 
-  const handleClick = (e: MouseEvent, i: number) => {
+  const handleClick = (e: MouseEvent, i: any) => {
     console.log(e);
-    if ((e.target as HTMLElement).className === "noImprovement") {
+    if ((e.target as HTMLElement).className === "noImprovements") {
       setIsAddVisible("visible");
       setClickedI(i)
+      
+      
     } else {
       setIsEditVisible("visible");
       setClickedI(i)
@@ -139,22 +141,22 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade }: MapProps) {
   };
 
   function handleRemove() {}
-
+  console.log(clickedI)
   return (
     <>
       <div id="map">
-        {[...Array(25)].map((improvements, i) => (
+        {[...Array(25)].map((_, i) => (
           <Tile
             key={i}
-            improvements={improvements}
+            improvements={improvements[i]}
             OnClick={(e: MouseEvent) => handleClick(e, i)}
           />
-        ))}
+         ))} 
       </div>
       <div style={{ visibility: `${isAddVisible}` }}>
         <AddImprovementDialog
-          OnAdd={(i,formData) => {
-            OnAdd(i, formData), setIsAddVisible("hidden");
+          OnAdd={(formData) => {
+            OnAdd(clickedI, formData), setIsAddVisible("hidden");
           }}
           OnCancel={() => setIsAddVisible("hidden")}
           typeOptions={typeOptions}
@@ -162,13 +164,16 @@ export function Map({ OnAdd, OnUpgrade,OnDowngrade }: MapProps) {
       </div>
       <div style={{ visibility: `${isEditVisible}` }}>
         <EditImprovementDialog
-          OnUpgrade={(i) => {OnUpgrade(i)}}
-          OnDowngrade={(i) => {OnDowngrade(i)}}
+          OnUpgrade={() => {OnUpgrade(clickedI)}}
+          OnDowngrade={() => {OnDowngrade(clickedI)}}
           OnClose={() => setIsAddVisible("hidden")}
-          OnRemove={() => handleRemove}
+          OnRemove={() =>{handleRemove}}
           typeOptions={typeOptions}
+          improvements={improvements}
         />
       </div>
     </>
+    
   );
+
 }
